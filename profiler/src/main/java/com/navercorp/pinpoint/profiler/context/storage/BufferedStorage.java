@@ -50,6 +50,7 @@ public class BufferedStorage implements Storage {
         this.dataSender = Assert.requireNonNull(dataSender, "dataSender must not be null");
         this.bufferSize = bufferSize;
         this.storage = allocateBuffer();
+        logger.info("BufferedStorage constructor: dataSender is " + dataSender.getClass().getName());
     }
 
     @Override
@@ -96,6 +97,7 @@ public class BufferedStorage implements Storage {
         if (isDebug) {
             logger.debug("Flush {}", span);
         }
+        logger.info("BufferedStorage.store(span), span is {}...", span);
         final boolean success = this.dataSender.send(span);
         if (!success) {
             // WARN : Do not call span.toString ()
@@ -117,6 +119,8 @@ public class BufferedStorage implements Storage {
         if (isDebug) {
             logger.debug("Flush {}", spanChunk);
         }
+
+        logger.info("BufferedStorage.sendSpanChunk(spanEventList), span is {}...", spanEventList);
         final boolean success = this.dataSender.send(spanChunk);
         if (!success) {
             // WARN : Do not call span.toString ()

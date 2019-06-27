@@ -23,6 +23,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import com.navercorp.pinpoint.profiler.context.thrift.MessageConverter;
 import com.navercorp.pinpoint.profiler.metadata.AgentInfo;
 import com.navercorp.pinpoint.profiler.sender.ResultResponse;
+import com.navercorp.pinpoint.profiler.sender.localfilesender.LoggerCache;
 import com.navercorp.pinpoint.profiler.util.AgentInfoFactory;
 import com.navercorp.pinpoint.rpc.DefaultFuture;
 import com.navercorp.pinpoint.rpc.ResponseMessage;
@@ -167,6 +168,7 @@ public class AgentInfoSender {
             }
         }
 
+        /*
         private boolean sendAgentInfo() {
             try {
                 AgentInfo agentInfo = agentInfoFactory.createAgentInfo();
@@ -197,6 +199,15 @@ public class AgentInfoSender {
                 logger.warn("failed to send agent info.", e);
             }
             return false;
+        }
+        */
+        private boolean sendAgentInfo() {
+            AgentInfo agentInfo = agentInfoFactory.createAgentInfo();
+            logger.info("Sending AgentInfo {}", agentInfo);
+
+            Logger agentInfoLogger = LoggerCache.getLogger("agentInfo");
+            agentInfoLogger.info(agentInfo.toString());
+            return true;
         }
     }
 

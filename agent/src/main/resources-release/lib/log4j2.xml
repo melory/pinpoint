@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">-->
+<!--<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>-->
+<Configuration status="debug">
+
+    <!--<appender name="console" class="org.apache.log4j.ConsoleAppender">-->
+        <!--<param name="Threshold" value="WARN"/>-->
+        <!--<layout class="org.apache.log4j.EnhancedPatternLayout">-->
+            <!--&lt;!&ndash; %L(line number) option is extremely slow. &ndash;&gt;-->
+            <!--<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%-5p](%-35.35c{1.}) %m%n"/>-->
+        <!--</layout>-->
+    <!--</appender>-->
+
+    <!--<appender name="dailyRollingFile" class="org.apache.log4j.DailyRollingFileAppender">-->
+        <!--<param name="file" value="${pinpoint.log}/${pinpoint.agentId}-pinpoint.log"/>-->
+        <!--<param name="Append" value="true"/>-->
+        <!--<param name="DatePattern" value="'.'yyyy-MM-dd"/>-->
+
+        <!--<layout class="org.apache.log4j.EnhancedPatternLayout">-->
+            <!--&lt;!&ndash; %L(line number) option is extremely slow. &ndash;&gt;-->
+            <!--<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%-5p](%-35.35c{1.}) %m%n"/>-->
+        <!--</layout>-->
+    <!--</appender>-->
+
+    <!--<appender name="rollingFile" class="org.apache.log4j.RollingFileAppender">-->
+        <!--<param name="file" value="${pinpoint.log}/${pinpoint.agentId}-pinpoint.log"/>-->
+        <!--<param name="append" value="true"/>-->
+        <!--<param name="maxFileSize" value="10MB"/>-->
+        <!--<param name="maxBackupIndex" value="20"/>-->
+        <!--<layout class="org.apache.log4j.EnhancedPatternLayout">-->
+            <!--&lt;!&ndash; %L(line number) option is extremely slow. &ndash;&gt;-->
+            <!--<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%-5p](%-35.35c{1.}) %m%n"/>-->
+        <!--</layout>-->
+    <!--</appender>-->
+
+
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%-5p](%-35.35c{1.}:%-3L) %m%n"/>
+        </Console>
+        <RollingFile name="DailyRollingFile" fileName="/usr/share/aliyun/emr/pinpoint-agent/log/${sys:pinpoint.agentId}-pinpoint.log"
+                     filePattern="/usr/share/aliyun/emr/pinpoint-agent/log/${sys:pinpoint.agentId}-pinpoint-%d{yyyy-MM-dd}.log" append="true">
+            <PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10" />
+        </RollingFile>
+        <RollingFile name="RollingFile" fileName="/usr/share/aliyun/emr/pinpoint-agent/log/${sys:pinpoint.agentId}-pinpoint.log"
+                     filePattern="/usr/share/aliyun/emr/pinpoint-agent/log/${sys:pinpoint.agentId}-pinpoint-%d{MM-dd-yyyy}-%i.log.gz" append="true">
+            <PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+    </Appenders>
+
+    <!--<logger name="com.navercorp.pinpoint" additivity="false">-->
+        <!--<level value="INFO"/>-->
+        <!--<appender-ref ref="console"/>-->
+        <!--<appender-ref ref="rollingFile"/>-->
+    <!--</logger>-->
+
+    <!--<root>-->
+        <!--<level value="INFO"/>-->
+        <!--<appender-ref ref="rollingFile"/>-->
+    <!--</root>-->
+
+
+    <Loggers>
+        <Logger name="com.navercorp.pinpoint" level="debug">
+            <AppenderRef ref="STDOUT"/>
+            <AppenderRef ref="RollingFile"/>
+        </Logger>
+        <Root level="debug">
+            <AppenderRef ref="RollingFile"/>
+        </Root>
+    </Loggers>
+<!--</log4j:configuration>-->
+</Configuration>

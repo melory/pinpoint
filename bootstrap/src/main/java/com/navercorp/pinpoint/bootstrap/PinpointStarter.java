@@ -105,6 +105,7 @@ class PinpointStarter {
 
         // set the path of log file as a system property
         saveLogFilePath(agentDirectory);
+        logger.info("finished save log file path...");
 
         savePinpointVersion();
 

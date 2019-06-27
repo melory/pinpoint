@@ -94,8 +94,8 @@
 
     <properties>
         <encoding>UTF-8</encoding>
-        <jdk.version>1.6</jdk.version>
-        <jdk.home>${env.JAVA_6_HOME}</jdk.home>
+        <jdk.version>1.8</jdk.version>
+        <jdk.home>${env.JAVA_8_HOME}</jdk.home>
         <test.jdk.home>${jdk.home}</test.jdk.home>
 
         <!-- hbase -->
@@ -103,6 +103,7 @@
 
         <!-- library -->
         <slf4j.version>1.7.21</slf4j.version>
+        <log4j2.version>2.4</log4j2.version>
         <metrics.version>3.1.2</metrics.version>
 
         <!-- jdk 6 compatibility version -->
@@ -442,17 +443,40 @@
                 <artifactId>jcl-over-slf4j</artifactId>
                 <version>${slf4j.version}</version>
             </dependency>
+            <!--<dependency>-->
+                <!--<groupId>org.slf4j</groupId>-->
+                <!--<artifactId>slf4j-log4j12</artifactId>-->
+                <!--<version>${slf4j.version}</version>-->
+            <!--</dependency>-->
+
+
+            <!-- upgrade log4j to log4j2 -->
             <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-log4j12</artifactId>
-                <version>${slf4j.version}</version>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-1.2-api</artifactId>
+                <version>${log4j2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-slf4j-impl</artifactId>
+                <version>${log4j2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j2.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>log4j</groupId>
-                <artifactId>log4j</artifactId>
-                <version>1.2.16</version>
-            </dependency>
+            <!--<dependency>-->
+                <!--<groupId>log4j</groupId>-->
+                <!--<artifactId>log4j</artifactId>-->
+                <!--<version>1.2.16</version>-->
+            <!--</dependency>-->
 
             <dependency>
                 <groupId>org.apache.commons</groupId>
@@ -718,6 +742,11 @@
                 <version>4.1.0</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.alibaba.middleware</groupId>
+                <artifactId>metrics-core-api</artifactId>
+                <version>2.0.2</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>

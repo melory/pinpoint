@@ -28,6 +28,7 @@ import com.navercorp.pinpoint.profiler.sender.MessageSerializer;
 import com.navercorp.pinpoint.profiler.sender.TcpDataSender;
 import com.navercorp.pinpoint.profiler.sender.ThriftMessageSerializer;
 import com.navercorp.pinpoint.profiler.sender.UdpDataSenderFactory;
+import com.navercorp.pinpoint.profiler.sender.localfilesender.LocalFileDataSender;
 import com.navercorp.pinpoint.rpc.client.PinpointClientFactory;
 import org.apache.thrift.TBase;
 import org.slf4j.Logger;
@@ -71,6 +72,7 @@ public class SpanDataSenderProvider  implements Provider<DataSender> {
 
     @Override
     public DataSender get() {
+        /*
         if ("TCP".equalsIgnoreCase(transportType)) {
             if ("OIO".equalsIgnoreCase(ioType)) {
                 logger.warn("TCP transport not support OIO type.(only support NIO)");
@@ -83,6 +85,8 @@ public class SpanDataSenderProvider  implements Provider<DataSender> {
             UdpDataSenderFactory factory = new UdpDataSenderFactory(ip, port, UDP_EXECUTOR_NAME, writeQueueSize, timeout, sendBufferSize, messageConverter);
             return factory.create(ioType);
         }
+        */
+        return new LocalFileDataSender("", "");
     }
 
     @Override

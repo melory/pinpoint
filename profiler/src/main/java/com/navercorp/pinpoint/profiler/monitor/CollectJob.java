@@ -57,10 +57,12 @@ public class CollectJob implements Runnable {
         this.agentStatCollector = agentStatCollector;
         this.numCollectionsPerBatch = numCollectionsPerBatch;
         this.agentStats = new ArrayList<AgentStatMetricSnapshot>(numCollectionsPerBatch);
+        logger.info("CollectJob constructor, dataSender is: " + dataSender.getClass().getName());
     }
 
     @Override
     public void run() {
+        logger.info("start to collect agent stat metrics...");
         final long currentCollectionTimestamp = System.currentTimeMillis();
         final long collectInterval = currentCollectionTimestamp - this.prevCollectionTimestamp;
         try {
@@ -80,6 +82,7 @@ public class CollectJob implements Runnable {
     }
 
     private void sendAgentStats() {
+        logger.info("start to send agent stat data...");
         // prepare TAgentStat object.
         // TODO multi thread issue.
         // If we reuse TAgentStat, there could be concurrency issue because data sender runs in a different thread.
@@ -91,7 +94,8 @@ public class CollectJob implements Runnable {
         // thread.
         // So create new list.
         this.agentStats = new ArrayList<AgentStatMetricSnapshot>(numCollectionsPerBatch);
-        logger.trace("collect agentStat:{}", agentStatBatch);
+        logger.info("collect agentStat:{}", agentStatBatch);
+        logger.info("agent stats data collect job dataSender: " + dataSender.getClass().getName());
         dataSender.send(agentStatBatch);
     }
 }

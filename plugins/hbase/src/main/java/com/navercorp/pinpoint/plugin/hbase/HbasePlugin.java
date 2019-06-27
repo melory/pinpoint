@@ -50,12 +50,13 @@ public class HbasePlugin implements ProfilerPlugin, TransformTemplateAware {
 
     @Override
     public void setTransformTemplate(TransformTemplate transformTemplate) {
+        logger.info("HbasePlugin setTransformTemplate...");
         this.transformTemplate = transformTemplate;
     }
 
     @Override
     public void setup(ProfilerPluginSetupContext context) {
-
+        logger.info("HbasePlugin setup...");
         HbasePluginConfig config = new HbasePluginConfig(context.getConfig());
         if (!config.isClientProfile()) {
             logger.info("{} disabled", this.getClass().getSimpleName());
@@ -77,6 +78,8 @@ public class HbasePlugin implements ProfilerPlugin, TransformTemplateAware {
         transformTemplate.transform("org.apache.hadoop.hbase.client.AsyncProcess$AsyncRequestFutureImpl$SingleServerRequestRunnable", SingleServerRequestRunnableTransform.class);
         transformTemplate.transform("org.apache.hadoop.hbase.ipc.RpcClientImpl", RpcClientImplTransform.class);
         transformTemplate.transform("org.apache.hadoop.hbase.ipc.AsyncRpcClient", RpcClientImplTransform.class);
+
+        logger.info("HbasePlugin addHbaseClientTransformer...");
     }
 
     public static class AsyncProcessTransform implements TransformCallback {
@@ -129,6 +132,8 @@ public class HbasePlugin implements ProfilerPlugin, TransformTemplateAware {
     private void addHbaseAdminTransformer() {
 
         transformTemplate.transform("org.apache.hadoop.hbase.client.HBaseAdmin", HBaseAdminTransform.class);
+
+        logger.info("HbasePlugin addHbaseAdminTransformer...");
     }
 
     public static class HBaseAdminTransform implements TransformCallback {
@@ -148,6 +153,8 @@ public class HbasePlugin implements ProfilerPlugin, TransformTemplateAware {
 
     private void addHbaseTableTransformer() {
         transformTemplate.transform("org.apache.hadoop.hbase.client.HTable", HTableTransform.class);
+
+        logger.info("HbasePlugin addHbaseTableTransformer...");
     }
 
     public static class HTableTransform implements TransformCallback {

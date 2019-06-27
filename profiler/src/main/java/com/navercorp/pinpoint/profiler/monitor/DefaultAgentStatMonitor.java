@@ -62,6 +62,7 @@ public class DefaultAgentStatMonitor implements AgentStatMonitor {
                                    @Named("AgentStatCollector") AgentStatMetricCollector<AgentStatMetricSnapshot> agentStatCollector,
                                    ProfilerConfig profilerConfig) {
         this(dataSender, agentId, agentStartTimestamp, agentStatCollector, profilerConfig.getProfileJvmStatCollectIntervalMs(), profilerConfig.getProfileJvmStatBatchSendCount());
+        logger.info("DefaultAgentStatMonitor constructor, dataSender is: " + dataSender.getClass().getName());
     }
 
     public DefaultAgentStatMonitor(DataSender dataSender,
@@ -87,9 +88,14 @@ public class DefaultAgentStatMonitor implements AgentStatMonitor {
             numCollectionsPerBatch = DEFAULT_NUM_COLLECTIONS_PER_SEND;
         }
         this.collectionIntervalMs = collectionIntervalMs;
+
+        logger.info("Before initializing CollectJob, dataSender is: " + dataSender.getClass().getName());
         this.collectJob = new CollectJob(dataSender, agentId, agentStartTimestamp, agentStatCollector, numCollectionsPerBatch);
+        logger.info("after initializing CollectJob, dataSender is: " + dataSender.getClass().getName());
 
         preLoadClass(agentId, agentStartTimestamp, agentStatCollector);
+
+        logger.info("after preLoadClass, dataSender is: " + dataSender.getClass().getName());
     }
 
     // https://github.com/naver/pinpoint/issues/2881
@@ -99,18 +105,18 @@ public class DefaultAgentStatMonitor implements AgentStatMonitor {
     // eg) executor.scheduleAtFixedRate(collectJob, 0(initialDelay is zero), this.collectionIntervalMs, TimeUnit.MILLISECONDS);
     private void preLoadClass(String agentId, long agentStartTimestamp, AgentStatMetricCollector<AgentStatMetricSnapshot> agentStatCollector) {
         logger.debug("pre-load class start");
-        CollectJob collectJob = new CollectJob(EmptyDataSender.INSTANCE, agentId, agentStartTimestamp, agentStatCollector, 1);
+//        CollectJob collectJob = new CollectJob(EmptyDataSender.INSTANCE, agentId, agentStartTimestamp, agentStatCollector, 1);
 
         // It is called twice to initialize some fields.
-        collectJob.run();
-        collectJob.run();
+//        collectJob.run();
+//        collectJob.run();
         logger.debug("pre-load class end");
     }
 
     @Override
     public void start() {
         executor.scheduleAtFixedRate(collectJob, this.collectionIntervalMs, this.collectionIntervalMs, TimeUnit.MILLISECONDS);
-        logger.info("AgentStat monitor started");
+        logger.info("AgentStat monitor started, initialDelay=" + this.collectionIntervalMs + ", interval=" + this.collectionIntervalMs);
     }
 
     @Override

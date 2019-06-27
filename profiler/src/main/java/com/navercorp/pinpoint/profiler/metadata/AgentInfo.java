@@ -50,9 +50,9 @@ public class AgentInfo {
     @Override
     public String toString() {
         return "AgentInfo{" +
-                "agentInformation=" + agentInformation +
-                ", serverMetaData=" + serverMetaData +
-                ", jvmInformation=" + jvmInformation +
+                "agentInformation=" + agentInformation.toString() +
+                ", serverMetaData=" + serverMetaData.toString() +
+                ", jvmInformation=" + jvmInformation.toString() +
                 '}';
     }
 }
