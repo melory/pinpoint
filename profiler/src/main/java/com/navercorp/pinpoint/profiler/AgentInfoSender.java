@@ -25,8 +25,6 @@ import com.navercorp.pinpoint.profiler.metadata.AgentInfo;
 import com.navercorp.pinpoint.profiler.sender.ResultResponse;
 import com.navercorp.pinpoint.profiler.sender.localfilesender.LoggerCache;
 import com.navercorp.pinpoint.profiler.util.AgentInfoFactory;
-import com.navercorp.pinpoint.rpc.DefaultFuture;
-import com.navercorp.pinpoint.rpc.ResponseMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -205,7 +203,7 @@ public class AgentInfoSender {
             AgentInfo agentInfo = agentInfoFactory.createAgentInfo();
             logger.info("Sending AgentInfo {}", agentInfo);
 
-            Logger agentInfoLogger = LoggerCache.getLogger("agentInfo");
+            Logger agentInfoLogger = LoggerCache.getLogger("AgentInfo");
             agentInfoLogger.info(agentInfo.toString());
             return true;
         }

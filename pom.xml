@@ -138,7 +138,7 @@
         <plugin.enforcer.version>3.0.0-M2</plugin.enforcer.version>
         <plugin.animal-sniffer.version>1.17</plugin.animal-sniffer.version>
 
-        <sniffer.artifactid>java16</sniffer.artifactid>
+        <sniffer.artifactid>java18</sniffer.artifactid>
     </properties>
 
     <dependencies>

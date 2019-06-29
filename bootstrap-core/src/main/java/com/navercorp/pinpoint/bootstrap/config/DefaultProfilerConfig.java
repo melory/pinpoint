@@ -49,6 +49,9 @@ public class DefaultProfilerConfig implements ProfilerConfig {
     public static final int DEFAULT_AGENT_STAT_COLLECTION_INTERVAL_MS = 5 * 1000;
     public static final int DEFAULT_NUM_AGENT_STAT_BATCH_SEND = 6;
 
+    public static final int DEFAULT_JMX_METRIC_COLLECTION_INTERVAL_MS = 30 * 1000;
+    public static final int DEFAULT_NUM_JMX_METRIC_BATCH_SEND = 2;
+
     private static class BypassResolver implements ValueResolver {
         public static final ValueResolver RESOLVER = new BypassResolver();
 

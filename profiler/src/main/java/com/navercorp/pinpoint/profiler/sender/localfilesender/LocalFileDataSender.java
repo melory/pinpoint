@@ -44,10 +44,16 @@ public class LocalFileDataSender implements DataSender {
     }
 
     private void logData(Object message) {
-        //TODO parse message header to determine which path to log
         logger.info(message.toString());
-        Logger agentStatLogger = LoggerCache.getLogger("AgentStat");
-        agentStatLogger.info(message.toString());
+        Logger localDataLogger = LoggerCache.getLogger("DefaultLog");
+        if (message instanceof LocalFileData) {
+            String logPath = ((LocalFileData) message).getLocalFilePath();
+            if (!StringUtils.isEmpty(logPath)) {
+                localDataLogger = LoggerCache.getLogger(logPath);
+            }
+        }
+        localDataLogger.info(message.toString());
+
     }
 
     @Override

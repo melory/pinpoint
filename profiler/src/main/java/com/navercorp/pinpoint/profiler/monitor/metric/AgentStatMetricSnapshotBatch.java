@@ -16,12 +16,14 @@
 
 package com.navercorp.pinpoint.profiler.monitor.metric;
 
+import com.navercorp.pinpoint.profiler.sender.localfilesender.LocalFileData;
+
 import java.util.List;
 
 /**
  * @author jaehong.kim
  */
-public class AgentStatMetricSnapshotBatch {
+public class AgentStatMetricSnapshotBatch extends LocalFileData {
     private java.lang.String agentId;
     private long startTimestamp;
     private List<AgentStatMetricSnapshot> agentStats;
@@ -58,5 +60,10 @@ public class AgentStatMetricSnapshotBatch {
         sb.append(", agentStats=").append(agentStats);
         sb.append('}');
         return sb.toString();
+    }
+
+    @Override
+    public String getLocalFilePath() {
+        return "SystemMetrics";
     }
 }

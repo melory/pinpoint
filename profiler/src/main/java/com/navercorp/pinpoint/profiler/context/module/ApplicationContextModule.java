@@ -107,6 +107,8 @@ import com.navercorp.pinpoint.profiler.monitor.AgentStatMonitor;
 import com.navercorp.pinpoint.profiler.monitor.DeadlockMonitor;
 import com.navercorp.pinpoint.profiler.monitor.DeadlockThreadRegistry;
 import com.navercorp.pinpoint.profiler.monitor.DefaultAgentStatMonitor;
+import com.navercorp.pinpoint.profiler.monitor.jmx.DefaultJmxFetcher;
+import com.navercorp.pinpoint.profiler.monitor.jmx.JmxFetcher;
 import com.navercorp.pinpoint.profiler.monitor.metric.response.ResponseTimeCollector;
 import com.navercorp.pinpoint.profiler.monitor.metric.response.ReuseResponseTimeCollector;
 import com.navercorp.pinpoint.profiler.objectfactory.ObjectBinderFactory;
@@ -189,6 +191,8 @@ public class ApplicationContextModule extends AbstractModule {
         bind(AgentInfoFactory.class).toProvider(AgentInfoFactoryProvider.class).in(Scopes.SINGLETON);
         bind(DeadlockMonitor.class).toProvider(DeadlockMonitorProvider.class).in(Scopes.SINGLETON);
         bind(AgentInfoSender.class).toProvider(AgentInfoSenderProvider.class).in(Scopes.SINGLETON);
+        bind(AgentStatMonitor.class).to(DefaultAgentStatMonitor.class).in(Scopes.SINGLETON);
+        bind(JmxFetcher.class).to(DefaultJmxFetcher.class).in(Scopes.SINGLETON);
         bind(AgentStatMonitor.class).to(DefaultAgentStatMonitor.class).in(Scopes.SINGLETON);
     }
 

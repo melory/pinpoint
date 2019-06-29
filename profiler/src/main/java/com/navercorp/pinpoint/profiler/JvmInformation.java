@@ -38,4 +38,12 @@ public class JvmInformation {
     public JvmGcType getJvmGcType() {
         return jvmGcType;
     }
+
+    @Override
+    public String toString() {
+        return "JvmInformation{" +
+                "jvmVersion='" + jvmVersion + '\'' +
+                ", jvmGcType=" + jvmGcType.toString() +
+                '}';
+    }
 }

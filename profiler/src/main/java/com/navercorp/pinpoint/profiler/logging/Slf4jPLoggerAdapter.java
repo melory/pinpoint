@@ -180,14 +180,14 @@ public class Slf4jPLoggerAdapter implements PLogger {
         appendParameterList(sb, args);
     }
 
-    private static void logMethod(StringBuilder sb, Object target, Object[] args) {
+    public static void logMethod(StringBuilder sb, Object target, Object[] args) {
         sb.append(getTarget(target));
         sb.append(' ');
         sb.append(" args:");
         appendParameterList(sb, args);
     }
 
-    private static String getTarget(Object target) {
+    public static String getTarget(Object target) {
         // Use class name instead of target.toString() because latter could cause side effects.
         if (target == null) {
             return "target=null";
@@ -196,7 +196,7 @@ public class Slf4jPLoggerAdapter implements PLogger {
         }
     }
 
-    private static void appendParameterList(StringBuilder sb, Object[] args) {
+    public static void appendParameterList(StringBuilder sb, Object[] args) {
         if (ArrayUtils.isEmpty(args)) {
             sb.append("()");
             return;
@@ -212,7 +212,7 @@ public class Slf4jPLoggerAdapter implements PLogger {
         }
     }
 
-    private static String normalizedParameter(Object arg) {
+    public static String normalizedParameter(Object arg) {
         // Do not call toString() because it could cause some side effects.
         if (arg == null) {
             return "null";

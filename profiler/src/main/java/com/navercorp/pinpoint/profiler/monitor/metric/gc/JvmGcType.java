@@ -36,4 +36,10 @@ public enum JvmGcType {
         return value;
     }
 
+    @Override
+    public String toString() {
+        return "JvmGcType{" +
+                "value=" + value +
+                '}';
+    }
 }

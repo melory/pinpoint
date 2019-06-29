@@ -1,0 +1,5 @@
+/Users/messi/Personal/Projects/pinpoint/plugins/hdfs/src/main/java/com/navercorp/pinpoint/plugin/hdfs/HdfsPluginConstants.java
+/Users/messi/Personal/Projects/pinpoint/plugins/hdfs/src/main/java/com/navercorp/pinpoint/plugin/hdfs/interceptor/HdfsMainInterceptor.java
+/Users/messi/Personal/Projects/pinpoint/plugins/hdfs/src/main/java/com/navercorp/pinpoint/plugin/hdfs/HdfsPluginMetadataProvider.java
+/Users/messi/Personal/Projects/pinpoint/plugins/hdfs/src/main/java/com/navercorp/pinpoint/plugin/hdfs/HdfsPlugin.java
+/Users/messi/Personal/Projects/pinpoint/plugins/hdfs/src/main/java/com/navercorp/pinpoint/plugin/hdfs/HdfsPluginConfig.java

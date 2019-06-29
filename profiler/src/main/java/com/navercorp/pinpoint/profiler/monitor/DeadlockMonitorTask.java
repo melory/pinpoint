@@ -87,7 +87,7 @@ public class DeadlockMonitorTask implements Runnable {
             deadlockOutput.append("================================================================").append(LINE_SEPARATOR);
 
             logger.warn(deadlockOutput.toString());
-            Logger deadlockLogger = LoggerCache.getLogger("DeadLockMonitor");
+            Logger deadlockLogger = LoggerCache.getLogger("DeadLockDump");
             deadlockLogger.info(deadlockOutput.toString());
 
         }

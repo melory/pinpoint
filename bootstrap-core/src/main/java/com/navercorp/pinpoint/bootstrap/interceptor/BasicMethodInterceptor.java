@@ -50,9 +50,9 @@ public class BasicMethodInterceptor implements AroundInterceptor {
 
     @Override
     public void before(Object target, Object[] args) {
-        if (isDebug) {
+//        if (isDebug) {
             logger.beforeInterceptor(target, args);
-        }
+//        }
 
         Trace trace = traceContext.currentTraceObject();
         if (trace == null) {
@@ -65,9 +65,9 @@ public class BasicMethodInterceptor implements AroundInterceptor {
 
     @Override
     public void after(Object target, Object[] args, Object result, Throwable throwable) {
-        if (isDebug) {
+//        if (isDebug) {
             logger.afterInterceptor(target, args);
-        }
+//        }
 
         Trace trace = traceContext.currentTraceObject();
         if (trace == null) {

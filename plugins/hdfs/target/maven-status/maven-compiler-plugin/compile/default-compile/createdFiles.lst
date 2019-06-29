@@ -1,0 +1,6 @@
+com/navercorp/pinpoint/plugin/hdfs/HdfsPluginConfig.class
+com/navercorp/pinpoint/plugin/hdfs/interceptor/HdfsMainInterceptor.class
+com/navercorp/pinpoint/plugin/hdfs/HdfsPlugin.class
+com/navercorp/pinpoint/plugin/hdfs/HdfsPlugin$HdfsClientTransform.class
+com/navercorp/pinpoint/plugin/hdfs/HdfsPluginConstants.class
+com/navercorp/pinpoint/plugin/hdfs/HdfsPluginMetadataProvider.class
